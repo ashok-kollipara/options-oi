@@ -1,3 +1,10 @@
+#project generated files for temporary handling for regulatory requirements
+*.json
+
+#
+# prelisted exceptions below
+#
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,3 +135,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
