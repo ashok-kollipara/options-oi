@@ -3,15 +3,15 @@ import matplotlib.pyplot as plt
 import json
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (
-    FigureCanvasTkAgg,
-    NavigationToolbar2Tk
-)
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 filename = "option_chain.json"
-atm=0
+atm = 0
 
-def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container_window):
+
+def plot_open_interest_data(
+    spot, strikes, expiry_list, expiry, index, container_window
+):
 
     global atm
     content = {}
@@ -21,26 +21,28 @@ def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container
         content = json.load(json_file)
 
     index_dict = {
-            'NIFTY' : {'slicer':25, 'lot_size':50},
-            'BANKNIFTY' : {'slicer':100, 'lot_size':25},
-            'USDINR' : {'slicer':0.1250, 'lot_size':1}  #  USDINR is leveraged for 1000 USD for 1 Qty
-            }
+        "NIFTY": {"slicer": 25, "lot_size": 50},
+        "BANKNIFTY": {"slicer": 100, "lot_size": 25},
+        "USDINR": {
+            "slicer": 0.1250,
+            "lot_size": 1,
+        },  #  USDINR is leveraged for 1000 USD for 1 Qty
+    }
 
-    atm_slicer = index_dict[index]['slicer']
-    lot_size = index_dict[index]['lot_size']
+    atm_slicer = index_dict[index]["slicer"]
+    lot_size = index_dict[index]["lot_size"]
 
     f_strikes = []
     call_oi = []
     put_oi = []
     call_change_oi = []
     put_change_oi = []
-    
 
     for item in strikes:
         if abs(item - spot) < atm_slicer:
             atm = item
 
-    #os.system("cls")
+    # os.system("cls")
     print(f"{index} Spot is : {spot}")
     print(f"{index} ATM strike is : {atm}")
     # print(strikes)
@@ -85,22 +87,19 @@ def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container
     calls_change = round(lot_size * sum(call_change_oi) / 1000000, 2)
     puts_change = round(lot_size * sum(put_change_oi) / 1000000, 2)
 
-
     # Plotting Begins here
     # splitting into subplots with shared strike price x-axis
     fig, axs = plt.subplots(2, 1, sharex=True)
 
-    canvas = FigureCanvasTkAgg(fig,
-                               master = container_window)  
+    canvas = FigureCanvasTkAgg(fig, master=container_window)
     canvas.draw()
-    
+
     canvas.get_tk_widget().pack()
 
     # creating the Matplotlib toolbar
-    toolbar = NavigationToolbar2Tk(canvas,
-                                   container_window)
+    toolbar = NavigationToolbar2Tk(canvas, container_window)
     toolbar.update()
-  
+
     # placing the toolbar on the Tkinter window
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
@@ -132,9 +131,7 @@ def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container
         linewidth=1,
         width=7,
     )
-    axs[0].annotate(
-        f"ATM Strike {atm}", xy=(atm + 50, atm_oi_yval), xycoords="data"
-    )
+    axs[0].annotate(f"ATM Strike {atm}", xy=(atm + 50, atm_oi_yval), xycoords="data")
     axs[0].set_title(f"{index} Open Interest")
 
     # plotting change in OI and atm strike as another sub plot
@@ -168,7 +165,7 @@ def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container
     axs[1].annotate(
         f"ATM Strike {atm}", xy=(atm + 50, atm_change_oi_yval), xycoords="data"
     )
-    #axs[1].annotate(f'Calls : {(lot_size*sum(call_change_oi)/1000000)}M \n Puts : {(lot_size*sum(put_change_oi)/1000000)}M',xy=(atm+100, atm_change_oi_yval-10000),xycoords='data')
+    # axs[1].annotate(f'Calls : {(lot_size*sum(call_change_oi)/1000000)}M \n Puts : {(lot_size*sum(put_change_oi)/1000000)}M',xy=(atm+100, atm_change_oi_yval-10000),xycoords='data')
     axs[1].set_title(f"{index} Change in Open Interest")
 
     # show legends for the plot
@@ -176,9 +173,6 @@ def plot_open_interest_data(spot, strikes, expiry_list, expiry, index, container
     axs[1].legend()
 
     # function to show the plot
-    #plt.show()
+    # plt.show()
 
     return
-
-
-

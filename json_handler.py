@@ -4,6 +4,7 @@ import time
 
 filename = "option_chain.json"
 
+
 def get_OC_json(index_name):
 
     headers = {"User-Agent": "Mozilla/5.0"}
@@ -29,6 +30,7 @@ def get_OC_json(index_name):
 
     return
 
+
 def filter_OC_json_data():
 
     content = {}
@@ -41,20 +43,18 @@ def filter_OC_json_data():
         content = json.load(json_file)
 
     # get strikes, Spot and ATM strike
-    # underlying value is given as float in NIFTY,BANKNIFTY api 
+    # underlying value is given as float in NIFTY,BANKNIFTY api
     # and as text in USDINR api
 
     spot = float(content["records"]["underlyingValue"])
     strikes = content["records"]["strikePrices"]
     expiry_list = content["records"]["expiryDates"]
 
-    #print(spot)
-    #print(type(content))
+    # print(spot)
+    # print(type(content))
 
-    return (spot,strikes,expiry_list)
+    return (spot, strikes, expiry_list)
 
 
-
-#get_OC_json('NIFTY')
-#filter_OC_json_data()
-
+# get_OC_json('NIFTY')
+# filter_OC_json_data()
