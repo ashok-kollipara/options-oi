@@ -30,6 +30,15 @@ def ui_space():
     # Place the window at the center of the screen
     ui_win.eval("tk::PlaceWindow . center")
 
+    def destroyer():
+
+        ui_win.quit()
+        ui_win.destroy()
+
+    # Destroy windows on main window close detection and exit python
+    ui_win.wm_protocol ("WM_DELETE_WINDOW",destroyer)   
+
+
     def plot_api_data():
 
         # forget all available widgets in the frame

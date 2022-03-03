@@ -172,6 +172,16 @@ def plot_open_interest_data(
     axs[0].legend()
     axs[1].legend()
 
+    # Define the size of window or frame
+    container_window.geometry("1200x800")
+
+    def destroyer():
+        container_window.quit()
+        container_window.destroy()
+    
+    # Destroy windows on main window close detection and exit python
+    container_window.wm_protocol ("WM_DELETE_WINDOW",destroyer)
+    
     # function to show the plot
     # plt.show()
 
