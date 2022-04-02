@@ -16,7 +16,8 @@ The aim of this project is to able to fetch the Option chain data available from
 Clone the project/repository into desired folder
 
 ```
-git clone git@github.com:ashok-kollipara/options-oi.git
+git clone https://github.com/ashok-kollipara/options-oi.git
+
 ```
 
 **Step 2. Get Python**
