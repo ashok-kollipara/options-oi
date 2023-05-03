@@ -25,6 +25,8 @@ def plot_open_interest_data(
     index_dict = {
         "NIFTY": {"slicer": 25, "lot_size": 50},
         "BANKNIFTY": {"slicer": 100, "lot_size": 25},
+        "FINNIFTY": {"slicer": 25, "lot_size": 40},
+        "MIDCPNIFTY": {"slicer": 25, "lot_size": 75},
         "USDINR": {
             "slicer": 0.1250,
             "lot_size": 1,
@@ -43,6 +45,8 @@ def plot_open_interest_data(
     for item in strikes:
         if abs(item - spot) < atm_slicer:
             atm = item
+
+    
 
     # os.system("cls")
     print(f"{index} Spot is : {spot}")
@@ -79,6 +83,17 @@ def plot_open_interest_data(
 
         else:
             print("fail")
+
+    # def near_Atm_Strikes(f_strikes, atm, n):
+    #     index = f_strikes.index(atm)
+    #     start = max(0, index-n)
+    #     before = f_strikes[start:index]
+    #     end = min(len(f_strikes), index + n+1)
+    #     after = f_strikes[index+1:end]
+    #     near_atm_strikes = before + [atm] + after
+    #     return near_atm_strikes
+    
+    # f_strikes=near_Atm_Strikes(f_strikes=f_strikes, atm=atm, n=5)
 
     atm_oi_yval = max(max(call_oi), max(put_oi))
     atm_change_oi_yval = max(max(call_change_oi), max(put_change_oi))
