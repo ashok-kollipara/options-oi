@@ -4,7 +4,6 @@ import tkinter as tk
 import json_handler
 import plot
 
-# global value holders
 index_value = 0
 expiry_value = 0
 spot_price, strike_prices_list, expiry_dates_list = 0, [], []
@@ -18,7 +17,7 @@ def ui_space():
 
     global index_value
 
-    indices_list = ["NIFTY", "BANKNIFTY"]
+    indices_list = ["NIFTY", "BANKNIFTY", "FINNIFTY", "MIDCPNIFTY", "USDINR"]
 
     # Create an instance of tkinter frame
     ui_win = tk.Tk()
